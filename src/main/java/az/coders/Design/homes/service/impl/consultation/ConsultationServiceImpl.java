@@ -3,9 +3,7 @@ package az.coders.Design.homes.service.impl.consultation;
 import az.coders.Design.homes.config.EnhancedObjectMapper;
 import az.coders.Design.homes.dto.consultation.ConsultationDto;
 import az.coders.Design.homes.entity.Consultation;
-import az.coders.Design.homes.entity.ConsultationTopic;
 import az.coders.Design.homes.repository.consultation.ConsultationRepository;
-import az.coders.Design.homes.repository.consultation.ConsultationTopicRepository;
 import az.coders.Design.homes.service.ConsultationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,6 @@ import java.util.List;
 public class ConsultationServiceImpl implements ConsultationService {
     private final ConsultationRepository consultationRepository;
     private final EnhancedObjectMapper enhancedObjectMapper;
-    private final ConsultationTopicRepository consultationTopicRepository;
     @Override
     public List<ConsultationDto> getConsultations() {
         return enhancedObjectMapper.convertList(consultationRepository.findAll(), ConsultationDto.class);
