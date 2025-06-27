@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: Design-homes
+  profiles:
+    include:
+      - db
+      - security
+      - logging
+      - file
