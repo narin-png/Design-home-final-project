@@ -1,8 +1,7 @@
 package az.coders.Design.homes.controller.user;
 
-import az.coders.Design.homes.dto.UserDto;
+import az.coders.Design.homes.dto.security.UserDto;
 
-import az.coders.Design.homes.models.UserRequest;
 import az.coders.Design.homes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

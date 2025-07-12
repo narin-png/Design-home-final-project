@@ -1,7 +1,7 @@
 package az.coders.Design.homes.service.impl.security;
 
 import az.coders.Design.homes.config.JwtFilter;
-import az.coders.Design.homes.dto.RefreshTokenDTO;
+import az.coders.Design.homes.dto.security.RefreshTokenDTO;
 import az.coders.Design.homes.entity.RefreshToken;
 import az.coders.Design.homes.models.AccessTokenResponse;
 import az.coders.Design.homes.models.SignInRequest;

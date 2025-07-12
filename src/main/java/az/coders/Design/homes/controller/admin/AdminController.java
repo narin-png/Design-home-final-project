@@ -1,6 +1,6 @@
 package az.coders.Design.homes.controller.admin;
 
-import az.coders.Design.homes.dto.UserDto;
+import az.coders.Design.homes.dto.security.UserDto;
 import az.coders.Design.homes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

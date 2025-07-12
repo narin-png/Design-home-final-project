@@ -1,7 +1,7 @@
 package az.coders.Design.homes.service.impl.security;
 
 import az.coders.Design.homes.config.EnhancedObjectMapper;
-import az.coders.Design.homes.dto.UserDto;
+import az.coders.Design.homes.dto.security.UserDto;
 import az.coders.Design.homes.entity.User;
 import az.coders.Design.homes.models.UserRequest;
 import az.coders.Design.homes.repository.security.UserRepository;

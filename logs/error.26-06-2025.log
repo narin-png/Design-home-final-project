@@ -6,7 +6,7 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired 2803743489 milliseconds ago at 
 	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36)
 	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29)
 	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94)
-	at az.coders.Design.homes.service.impl.JwtServiceImpl.parseToken(JwtServiceImpl.java:26)
+	at az.coders.Design.homes.service.impl.security.JwtServiceImpl.parseToken(JwtServiceImpl.java:26)
 	at az.coders.Design.homes.config.JwtFilter.lambda$doFilterInternal$1(JwtFilter.java:37)
 	at java.base/java.util.Optional.ifPresent(Optional.java:178)
 	at az.coders.Design.homes.config.JwtFilter.doFilterInternal(JwtFilter.java:35)
@@ -80,7 +80,7 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired 2803745043 milliseconds ago at 
 	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36)
 	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29)
 	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94)
-	at az.coders.Design.homes.service.impl.JwtServiceImpl.parseToken(JwtServiceImpl.java:26)
+	at az.coders.Design.homes.service.impl.security.JwtServiceImpl.parseToken(JwtServiceImpl.java:26)
 	at az.coders.Design.homes.config.JwtFilter.lambda$doFilterInternal$1(JwtFilter.java:37)
 	at java.base/java.util.Optional.ifPresent(Optional.java:178)
 	at az.coders.Design.homes.config.JwtFilter.doFilterInternal(JwtFilter.java:35)
@@ -148,7 +148,7 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired 2803745043 milliseconds ago at 
 	at java.base/java.lang.Thread.run(Thread.java:1570)
 2025-06-26 13:13:21 [http-nio-8080-exec-5] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.EnhancedObjectMapper.convertValue(Object, java.lang.Class)" because "this.enhancedObjectMapper" is null] with root cause
 java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.EnhancedObjectMapper.convertValue(Object, java.lang.Class)" because "this.enhancedObjectMapper" is null
-	at az.coders.Design.homes.service.impl.ContactInfoServiceImpl.saveContactInfo(ContactInfoServiceImpl.java:27)
+	at az.coders.Design.homes.service.impl.footer.ContactInfoServiceImpl.saveContactInfo(ContactInfoServiceImpl.java:27)
 	at az.coders.Design.homes.controller.footer.ContactInfoController.createContactInfo(ContactInfoController.java:25)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -257,7 +257,7 @@ java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.Enh
 	at java.base/java.lang.Thread.run(Thread.java:1570)
 2025-06-26 13:15:08 [http-nio-8080-exec-3] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.EnhancedObjectMapper.convertValue(Object, java.lang.Class)" because "this.enhancedObjectMapper" is null] with root cause
 java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.EnhancedObjectMapper.convertValue(Object, java.lang.Class)" because "this.enhancedObjectMapper" is null
-	at az.coders.Design.homes.service.impl.ContactInfoServiceImpl.saveContactInfo(ContactInfoServiceImpl.java:27)
+	at az.coders.Design.homes.service.impl.footer.ContactInfoServiceImpl.saveContactInfo(ContactInfoServiceImpl.java:27)
 	at az.coders.Design.homes.controller.footer.ContactInfoController.createContactInfo(ContactInfoController.java:25)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -366,7 +366,7 @@ java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.Enh
 	at java.base/java.lang.Thread.run(Thread.java:1570)
 2025-06-26 13:17:59 [http-nio-8080-exec-6] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.EnhancedObjectMapper.convertValue(Object, java.lang.Class)" because "this.enhancedObjectMapper" is null] with root cause
 java.lang.NullPointerException: Cannot invoke "az.coders.Design.homes.config.EnhancedObjectMapper.convertValue(Object, java.lang.Class)" because "this.enhancedObjectMapper" is null
-	at az.coders.Design.homes.service.impl.ContactInfoServiceImpl.saveContactInfo(ContactInfoServiceImpl.java:27)
+	at az.coders.Design.homes.service.impl.footer.ContactInfoServiceImpl.saveContactInfo(ContactInfoServiceImpl.java:27)
 	at az.coders.Design.homes.controller.footer.ContactInfoController.createContactInfo(ContactInfoController.java:25)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -613,7 +613,7 @@ org.hibernate.query.QueryTypeMismatchException: Specified result type [az.coders
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy149.findByTitle(Unknown Source)
-	at az.coders.Design.homes.service.impl.LegalLinkServiceImpl.getLegalLinkByTitle(LegalLinkServiceImpl.java:29)
+	at az.coders.Design.homes.service.impl.footer.LegalLinkServiceImpl.getLegalLinkByTitle(LegalLinkServiceImpl.java:29)
 	at az.coders.Design.homes.controller.footer.LegalLinkController.getLegalLink(LegalLinkController.java:27)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -775,7 +775,7 @@ org.postgresql.util.PSQLException: Large Objects may not be used in auto-commit 
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy149.findByTitle(Unknown Source)
-	at az.coders.Design.homes.service.impl.LegalLinkServiceImpl.getLegalLinkByTitle(LegalLinkServiceImpl.java:29)
+	at az.coders.Design.homes.service.impl.footer.LegalLinkServiceImpl.getLegalLinkByTitle(LegalLinkServiceImpl.java:29)
 	at az.coders.Design.homes.controller.footer.LegalLinkController.getLegalLink(LegalLinkController.java:27)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -884,7 +884,7 @@ org.postgresql.util.PSQLException: Large Objects may not be used in auto-commit 
 	at java.base/java.lang.Thread.run(Thread.java:1570)
 2025-06-26 21:56:42 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.IllegalArgumentException: This email is already subscribed.] with root cause
 java.lang.IllegalArgumentException: This email is already subscribed.
-	at az.coders.Design.homes.service.impl.SubscriberServiceImpl.subscribe(SubscriberServiceImpl.java:22)
+	at az.coders.Design.homes.service.impl.footer.SubscriberServiceImpl.subscribe(SubscriberServiceImpl.java:22)
 	at az.coders.Design.homes.controller.footer.SubscriberController.subscribe(SubscriberController.java:20)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)

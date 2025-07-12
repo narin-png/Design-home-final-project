@@ -15,10 +15,6 @@ public class Faq {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    @JsonIgnore
-    private HomePage homePage;
-    @ManyToOne
-    @JsonIgnore
-    private Consultation consultation;
+    private String questions;
+    private String answers;
 }

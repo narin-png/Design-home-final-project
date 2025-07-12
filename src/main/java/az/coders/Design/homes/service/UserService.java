@@ -1,6 +1,6 @@
 package az.coders.Design.homes.service;
 
-import az.coders.Design.homes.dto.UserDto;
+import az.coders.Design.homes.dto.security.UserDto;
 import az.coders.Design.homes.models.UserRequest;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

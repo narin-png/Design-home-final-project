@@ -31,9 +31,6 @@ public class Testimonial {
     }
     @ManyToOne
     @JsonIgnore
-    private HomePage homePage;
-    @ManyToOne
-    @JsonIgnore
     private Consultation consultation;
     @Version
     private Integer version;
