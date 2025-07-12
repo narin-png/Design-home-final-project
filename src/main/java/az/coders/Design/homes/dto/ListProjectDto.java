@@ -19,7 +19,8 @@ public class ListProjectDto {
     private int bedroom;
     private int bathroom;
     private String location;
-    private ListServiceEntity service;
+    private Integer serviceId;       // Send this from frontend
+    private String serviceTitle;     // Set this in response
     private String status;
     private String overview;
     private String solution;
