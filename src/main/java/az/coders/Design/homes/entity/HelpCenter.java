@@ -1,5 +1,6 @@
 package az.coders.Design.homes.entity;
 
+import az.coders.Design.homes.entity.media.Media;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

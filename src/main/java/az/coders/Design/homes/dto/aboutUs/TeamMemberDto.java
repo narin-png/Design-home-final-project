@@ -1,5 +1,6 @@
 package az.coders.Design.homes.dto.aboutUs;
 
+import az.coders.Design.homes.entity.media.Media;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,5 @@ public class TeamMemberDto {
     private String instagramUrl;
     private String linkedInUrl;
     private String xUrl; // for Twitter/X
+    private Media image;
 }

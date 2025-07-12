@@ -40,6 +40,7 @@ BCryptPasswordEncoder bCryptPasswordEncoder() {
                 . authorizeHttpRequests(auth->auth.requestMatchers("/public/**", "/auth/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/medias").permitAll()
                 .anyRequest().authenticated())
                 .formLogin(AbstractHttpConfigurer::disable)
                 //.formLogin(Customizer.withDefaults())

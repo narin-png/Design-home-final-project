@@ -1,8 +1,7 @@
 package az.coders.Design.homes.entity;
 
-import az.coders.Design.homes.entity.footer.ContactInfo;
+import az.coders.Design.homes.entity.media.Media;
 import az.coders.Design.homes.enums.ConsultationTopicEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity

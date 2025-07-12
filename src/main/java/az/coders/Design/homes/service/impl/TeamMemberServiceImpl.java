@@ -39,6 +39,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         existingTeamMember.setPosition(teamMemberDto.getPosition());
         existingTeamMember.setLinkedInUrl(teamMemberDto.getLinkedInUrl());
         existingTeamMember.setInstagramUrl(teamMemberDto.getInstagramUrl());
+        existingTeamMember.setImage(teamMemberDto.getImage());
         existingTeamMember.setXUrl(teamMemberDto.getXUrl());
         TeamMember updatedTeamMember=teamMemberRepository.save(existingTeamMember);
         return enhancedObjectMapper.convertValue(updatedTeamMember, TeamMemberDto.class);

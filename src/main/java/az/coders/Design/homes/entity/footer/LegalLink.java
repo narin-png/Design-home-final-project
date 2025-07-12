@@ -1,6 +1,6 @@
 package az.coders.Design.homes.entity.footer;
 
-import az.coders.Design.homes.entity.Media;
+import az.coders.Design.homes.entity.media.Media;
 import az.coders.Design.homes.enums.LegalLinkEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
