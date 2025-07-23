@@ -5,6 +5,8 @@ import az.coders.Design.homes.dto.TestimonialDto;
 import az.coders.Design.homes.dto.footer.LegalLinkDto;
 import az.coders.Design.homes.entity.Testimonial;
 import az.coders.Design.homes.entity.footer.LegalLink;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.TestimonialRepository;
 import az.coders.Design.homes.service.TestimonialService;
 import jakarta.persistence.EntityNotFoundException;
@@ -34,17 +36,18 @@ public class TestimonialServiceImpl implements TestimonialService {
 
     @Override
     public void delete(Integer id) {
-        Testimonial testimonial = testimonialRepository.findById(id).orElseThrow(()->new RuntimeException("doesnt exist"));
+        Testimonial testimonial = testimonialRepository.findById(id).orElseThrow(()->new NotFoundException(ErrorCode.NOT_FOUND));
         testimonialRepository.delete(testimonial);
     }
 
     @Override
     public TestimonialDto update(Integer id, TestimonialDto updatedTestimonial) {
         Testimonial existing = testimonialRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Testimonial not found"));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
         existing.setName(updatedTestimonial.getName());
         existing.setComment(updatedTestimonial.getComment());
         existing.setRate(updatedTestimonial.getRate());
+        existing.setImage(updatedTestimonial.getImage());
 
 
         return enhancedObjectMapper.convertValue(testimonialRepository.save(existing),TestimonialDto.class);

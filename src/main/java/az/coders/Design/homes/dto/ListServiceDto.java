@@ -1,5 +1,6 @@
 package az.coders.Design.homes.dto;
 
+import az.coders.Design.homes.entity.media.Media;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,5 @@ public class ListServiceDto {
     private String content;
     private Date createdAt;
     private Date updatedAt;
+    private Media image;
 }

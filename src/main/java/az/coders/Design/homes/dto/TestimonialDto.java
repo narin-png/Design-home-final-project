@@ -1,5 +1,6 @@
 package az.coders.Design.homes.dto;
 
+import az.coders.Design.homes.entity.media.Media;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,5 @@ public class TestimonialDto {
     private String comment;
     private Integer rate;
     private LocalDateTime createdAt;
+    private Media image;
 }

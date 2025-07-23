@@ -1,5 +1,6 @@
 package az.coders.Design.homes.entity;
 
+import az.coders.Design.homes.entity.media.Media;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,9 @@ public class ListCareer {
     private String jobType;       // Fulltime, Freelance, etc.
     private String workMode;      // Remote, On-site
     private String experience;    // 5+ Years, 3+ Years, etc.
-    private String  salary;
+    private String salary;
+    @OneToOne
+    private Media image;
 
     @Temporal(TemporalType.DATE)
     private Date deadline;

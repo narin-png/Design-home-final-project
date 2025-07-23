@@ -5,6 +5,8 @@ import az.coders.Design.homes.dto.ListServiceDto;
 import az.coders.Design.homes.dto.aboutUs.TeamMemberDto;
 import az.coders.Design.homes.entity.ListServiceEntity;
 import az.coders.Design.homes.entity.aboutUs.TeamMember;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.aboutUs.TeamMemberRepository;
 import az.coders.Design.homes.service.TeamMemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +26,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
 
     @Override
     public TeamMemberDto getTeamMemberById(Integer id) {
-        return enhancedObjectMapper.convertValue(teamMemberRepository.findById(id).orElseThrow(()->new RuntimeException("team member not found")), TeamMemberDto.class);
+        return enhancedObjectMapper.convertValue(teamMemberRepository.findById(id).orElseThrow(()->new NotFoundException(ErrorCode.NOT_FOUND)), TeamMemberDto.class);
     }
     @Override
     public TeamMemberDto createTeamMember(TeamMemberDto teamMemberDto) {
@@ -33,7 +35,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
 
     @Override
     public TeamMemberDto updateTeamMember(Integer id, TeamMemberDto teamMemberDto) {
-        TeamMember existingTeamMember=teamMemberRepository.findById(id).orElseThrow(()->new RuntimeException("team member not found"));
+        TeamMember existingTeamMember=teamMemberRepository.findById(id).orElseThrow(()->new NotFoundException(ErrorCode.NOT_FOUND));
         existingTeamMember.setFullName(teamMemberDto.getFullName());
         existingTeamMember.setQualification(teamMemberDto.getQualification());
         existingTeamMember.setPosition(teamMemberDto.getPosition());
@@ -48,7 +50,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     @Override
     public void deleteTeamMember(Integer id) {
         if (!teamMemberRepository.existsById(id)) {
-            throw new RuntimeException("team member not found ");
+            throw new NotFoundException(ErrorCode.NOT_FOUND);
         }
         teamMemberRepository.deleteById(id);
     }

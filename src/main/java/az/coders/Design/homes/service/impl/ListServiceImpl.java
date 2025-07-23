@@ -5,6 +5,8 @@ import az.coders.Design.homes.dto.ListBloglDto;
 import az.coders.Design.homes.dto.ListServiceDto;
 import az.coders.Design.homes.entity.ListServiceEntity;
 import az.coders.Design.homes.entity.blog.ListBlog;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.ListServiceRepository;
 import az.coders.Design.homes.service.ListService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,7 @@ public class ListServiceImpl implements ListService {
     public ListServiceDto getServiceById(Integer id) {
         return enhancedObjectMapper.convertValue(
                 listServiceRepository.findById(id)
-                        .orElseThrow(() -> new RuntimeException("Service not found with id: " + id)),
+                        .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND)),
                 ListServiceDto.class
         ); }
 
@@ -39,11 +41,12 @@ public class ListServiceImpl implements ListService {
     @Override
     public ListServiceDto updateService(Integer id, ListServiceDto serviceDto) {
         ListServiceEntity existing = listServiceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Service not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
 
         // Update fields
         existing.setTitle(serviceDto.getTitle());
         existing.setShortDescription(serviceDto.getShortDescription());
+        existing.setImage(serviceDto.getImage());
         existing.setContent(serviceDto.getContent());
 
         ListServiceEntity updated = listServiceRepository.save(existing);
@@ -53,7 +56,7 @@ public class ListServiceImpl implements ListService {
     @Override
     public void deleteService(Integer id) {
         if (!listServiceRepository.existsById(id)) {
-            throw new RuntimeException("Service not found with id: " + id);
+            throw new NotFoundException(ErrorCode.NOT_FOUND);
         }
         listServiceRepository.deleteById(id);
     }

@@ -3,6 +3,8 @@ package az.coders.Design.homes.service.impl;
 import az.coders.Design.homes.config.EnhancedObjectMapper;
 import az.coders.Design.homes.dto.FaqDto;
 import az.coders.Design.homes.entity.Faq;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.FaqRepository;
 import az.coders.Design.homes.service.FaqService;
 import jakarta.persistence.SequenceGenerator;
@@ -25,7 +27,7 @@ public class FaqServiceImpl implements FaqService {
     @Override
     public FaqDto getFaqById(Integer id) {
         Faq faq = faqRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Faq not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
         return enhancedObjectMapper.convertValue(faq, FaqDto.class);
     }
 
@@ -38,7 +40,7 @@ public class FaqServiceImpl implements FaqService {
     @Override
     public FaqDto updateFaq(Integer id, FaqDto faqDto) {
         Faq existing = faqRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Faq not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
         existing.setQuestions(faqDto.getQuestions());
         existing.setAnswers(faqDto.getAnswers());
 
@@ -48,7 +50,7 @@ public class FaqServiceImpl implements FaqService {
     @Override
     public void deleteFaq(Integer id) {
         if (!faqRepository.existsById(id)) {
-            throw new RuntimeException("Faq not found with id: " + id);
+            throw new NotFoundException(ErrorCode.NOT_FOUND);
         }
         faqRepository.deleteById(id);
     }

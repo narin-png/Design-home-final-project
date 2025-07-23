@@ -1,5 +1,7 @@
 package az.coders.Design.homes.entity.media;
 
+import az.coders.Design.homes.entity.ListProject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +21,7 @@ public class Media {
     private String overlayText;
     @ManyToOne
     private MediaType mediaType;
+    @ManyToOne
+    @JsonIgnore
+    private ListProject listProject;
 }

@@ -5,13 +5,18 @@ import az.coders.Design.homes.dto.ListProjectDto;
 import az.coders.Design.homes.dto.ListServiceDto;
 import az.coders.Design.homes.entity.ListProject;
 import az.coders.Design.homes.entity.ListServiceEntity;
+import az.coders.Design.homes.entity.media.Media;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.ListProjectRepository;
 import az.coders.Design.homes.repository.ListServiceRepository;
+import az.coders.Design.homes.repository.media.MediaRepository;
 import az.coders.Design.homes.service.ListProjectService;
 import az.coders.Design.homes.service.ListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +25,8 @@ public class ListProjectServiceImpl implements ListProjectService {
     private final ListProjectRepository listProjectRepository;
     private final ListServiceRepository listServiceRepository;
     private final EnhancedObjectMapper enhancedObjectMapper;
+    private final MediaRepository mediaRepository;  // add this if you haven't already
+
 
     @Override
     public List<ListProjectDto> getListProjects() {
@@ -40,7 +47,7 @@ public class ListProjectServiceImpl implements ListProjectService {
     @Override
     public ListProjectDto getById(Integer id) {
         ListProject project = listProjectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
 
         ListProjectDto dto = enhancedObjectMapper.convertValue(project, ListProjectDto.class);
 
@@ -56,10 +63,23 @@ public class ListProjectServiceImpl implements ListProjectService {
     public ListProjectDto save(ListProjectDto dto) {
         ListProject project = enhancedObjectMapper.convertValue(dto, ListProject.class);
 
+        // Set service
         if (dto.getServiceId() != null) {
             ListServiceEntity service = listServiceRepository.findById(dto.getServiceId())
-                    .orElseThrow(() -> new RuntimeException("Service not found"));
+                    .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
             project.setService(service);
+        }
+
+        // Attach existing media
+        if (dto.getImages() != null) {
+            List<Media> mediaList = dto.getImages().stream()
+                    .map(imageDto -> {
+                        Media media = mediaRepository.findById(imageDto.getId())
+                                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
+                        media.setListProject(project); // establish reverse relationship
+                        return media;
+                    }).toList();
+            project.setImages(mediaList);
         }
 
         ListProject saved = listProjectRepository.save(project);
@@ -76,7 +96,7 @@ public class ListProjectServiceImpl implements ListProjectService {
     @Override
     public ListProjectDto update(Integer id, ListProjectDto dto) {
         ListProject existing = listProjectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
 
         existing.setProjectName(dto.getProjectName());
         existing.setClient(dto.getClient());
@@ -90,10 +110,29 @@ public class ListProjectServiceImpl implements ListProjectService {
         existing.setSolution(dto.getSolution());
         existing.setResult(dto.getResult());
 
+        // Set service
         if (dto.getServiceId() != null) {
             ListServiceEntity service = listServiceRepository.findById(dto.getServiceId())
-                    .orElseThrow(() -> new RuntimeException("Service not found"));
+                    .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
             existing.setService(service);
+        }
+
+        // Update media list safely
+        if (existing.getImages() == null) {
+            existing.setImages(new ArrayList<>());
+        } else {
+            existing.getImages().clear();
+        }
+
+        if (dto.getImages() != null && !dto.getImages().isEmpty()) {
+            List<Media> mediaList = new ArrayList<>();
+            for (Media imageDto : dto.getImages()) {
+                Media media = mediaRepository.findById(imageDto.getId())
+                        .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
+                media.setListProject(existing); // Set back-reference
+                mediaList.add(media);
+            }
+            existing.getImages().addAll(mediaList);
         }
 
         ListProject updated = listProjectRepository.save(existing);
@@ -107,10 +146,12 @@ public class ListProjectServiceImpl implements ListProjectService {
         return response;
     }
 
+
+
     @Override
     public void delete(Integer id) {
         if (!listProjectRepository.existsById(id)) {
-            throw new RuntimeException("Project not found with id: " + id);
+            throw new NotFoundException(ErrorCode.NOT_FOUND);
         }
         listProjectRepository.deleteById(id);
     }

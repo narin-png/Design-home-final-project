@@ -18,6 +18,7 @@ public class ListBlog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;  //name of blog
+    
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", updatable = false)
@@ -27,7 +28,7 @@ public class ListBlog {
     @Column(name = "updated_at")
     private Date updatedAt;
     @OneToOne
-    private Media media;
+    private Media image;
 
     @PrePersist
     protected void onCreate() {

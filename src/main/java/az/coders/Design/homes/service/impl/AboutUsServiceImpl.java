@@ -2,9 +2,9 @@ package az.coders.Design.homes.service.impl;
 
 import az.coders.Design.homes.config.EnhancedObjectMapper;
 import az.coders.Design.homes.dto.aboutUs.AboutUsDto;
-import az.coders.Design.homes.dto.aboutUs.TeamMemberDto;
 import az.coders.Design.homes.entity.aboutUs.AboutUs;
-import az.coders.Design.homes.entity.aboutUs.TeamMember;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.aboutUs.AboutUsRepository;
 import az.coders.Design.homes.service.AboutUsService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class AboutUsServiceImpl implements AboutUsService {
 
     @Override
     public AboutUsDto getAboutUsById(Integer id) {
-        return enhancedObjectMapper.convertValue(aboutUsRepository.findById(id).orElseThrow(()->new RuntimeException("no about us")), AboutUsDto.class);
+        return enhancedObjectMapper.convertValue(aboutUsRepository.findById(id).orElseThrow(()->new NotFoundException(ErrorCode.NOT_FOUND)), AboutUsDto.class);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class AboutUsServiceImpl implements AboutUsService {
     }
     @Override
     public AboutUsDto updateAboutUs(Integer id, AboutUsDto aboutUsDto) {
-        AboutUs existingAboutUs=aboutUsRepository.findById(id).orElseThrow(()->new RuntimeException("not found"));
+        AboutUs existingAboutUs=aboutUsRepository.findById(id).orElseThrow(()->new NotFoundException(ErrorCode.NOT_FOUND));
         existingAboutUs.setHappyClients(aboutUsDto.getHappyClients());
         existingAboutUs.setAwardWinningDesigns(aboutUsDto.getAwardWinningDesigns());
         existingAboutUs.setYearsOfExperience(aboutUsDto.getYearsOfExperience());
@@ -46,7 +46,7 @@ public class AboutUsServiceImpl implements AboutUsService {
     @Override
     public void deleteAboutUs(Integer id) {
         if (!aboutUsRepository.existsById(id)) {
-            throw new RuntimeException(" not found ");
+            throw new NotFoundException(ErrorCode.NOT_FOUND);
         }
         aboutUsRepository.deleteById(id);
     }

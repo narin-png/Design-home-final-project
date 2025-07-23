@@ -3,6 +3,8 @@ package az.coders.Design.homes.service.impl;
 import az.coders.Design.homes.config.EnhancedObjectMapper;
 import az.coders.Design.homes.dto.media.MediaDto;
 import az.coders.Design.homes.entity.media.Media;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.media.MediaRepository;
 import az.coders.Design.homes.repository.media.MediaTypeRepository;
 import az.coders.Design.homes.service.MediaService;
@@ -46,7 +48,7 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public void deleteMedia(Integer id) {
-        Media media = mediaRepository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+        Media media = mediaRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
         Path path = Paths.get(media.getPath());
         if (path.toFile().exists()) {
             path.toFile().delete();
@@ -56,7 +58,7 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Media getMedia(Integer id) {
-        return mediaRepository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+        return mediaRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
     }
 
     @Override
@@ -83,6 +85,6 @@ public class MediaServiceImpl implements MediaService {
         if(filePath.toFile().exists()) {
             return new InputStreamResource(new FileInputStream(filePath.toFile()));
         }
-        throw new RuntimeException("not found");
+        throw new NotFoundException(ErrorCode.NOT_FOUND);
     }
 }

@@ -3,6 +3,8 @@ package az.coders.Design.homes.service.impl;
 import az.coders.Design.homes.config.EnhancedObjectMapper;
 import az.coders.Design.homes.dto.ListBloglDto;
 import az.coders.Design.homes.entity.blog.ListBlog;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.ListBlogRepository;
 import az.coders.Design.homes.service.ListBlogService;
 import lombok.RequiredArgsConstructor;
@@ -44,10 +46,12 @@ public class ListBlogServiceImpl implements ListBlogService {
     @Override
     public ListBloglDto updateBlog(Integer id, ListBloglDto blog) {
         ListBlog existingBlog = listBlogRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Blog not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
 
         // Update fields
         existingBlog.setTitle(blog.getTitle());
+        existingBlog.setUpdatedAt(blog.getUpdatedAt());
+        existingBlog.setImage(blog.getImage());
         existingBlog.setContent(blog.getContent());
         // updatedAt will be updated automatically by @PreUpdate
 
@@ -59,7 +63,7 @@ public class ListBlogServiceImpl implements ListBlogService {
     @Override
     public void deleteBlog(Integer id) {
         if (!listBlogRepository.existsById(id)) {
-            throw new RuntimeException("Blog not found with id: " + id);
+            throw new NotFoundException(ErrorCode.NOT_FOUND);
         }
         listBlogRepository.deleteById(id);
     }

@@ -20,11 +20,11 @@ public class ListServiceEntity {
     private String title;  //name of blog
     @Column(length = 500)
     private String shortDescription;
-    @Lob
+
     private String content;
 
     @OneToOne
-    private Media media;
+    private Media image;
     @OneToMany(mappedBy = "service",cascade = CascadeType.ALL)
     private List<ListProject> projects;
 

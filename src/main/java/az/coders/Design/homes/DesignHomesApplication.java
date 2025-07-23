@@ -24,22 +24,22 @@ public class DesignHomesApplication implements CommandLineRunner {
 	private final PasswordEncoder passwordEncoder;
 	@Override
 	public void run(String... args) throws Exception {
-				Authority authorityUser = new Authority();
-		authorityUser.setAuthority("ROLE_USER");
-		authorityRepository.save(authorityUser);
-		Authority authorityAdmin = new Authority();
-		authorityAdmin.setAuthority("ROLE_ADMIN");
-		authorityRepository.save(authorityAdmin);
-		User user = new User();
-		user.setUsername("user");
-		user.setPassword(passwordEncoder.encode("1234"));
-		user.setAuthorities(List.of(authorityUser));
-		userRepository.save(user);
-		User userAdmin = new User();
-		userAdmin.setUsername("admin");
-		userAdmin.setPassword(passwordEncoder.encode("12345"));
-		userAdmin.setAuthorities(List.of(authorityUser,authorityAdmin));
-		userRepository.save(userAdmin);
+//				Authority authorityUser = new Authority();
+//		authorityUser.setAuthority("ROLE_USER");
+//		authorityRepository.save(authorityUser);
+//		Authority authorityAdmin = new Authority();
+//		authorityAdmin.setAuthority("ROLE_ADMIN");
+//		authorityRepository.save(authorityAdmin);
+//		User user = new User();
+//		user.setUsername("user");
+//		user.setPassword(passwordEncoder.encode("1234"));
+//		user.setAuthorities(List.of(authorityUser));
+//		userRepository.save(user);
+//		User userAdmin = new User();
+//		userAdmin.setUsername("admin");
+//		userAdmin.setPassword(passwordEncoder.encode("12345"));
+//		userAdmin.setAuthorities(List.of(authorityUser,authorityAdmin));
+//		userRepository.save(userAdmin);
 	}
 
 	public static void main(String[] args) {

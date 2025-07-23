@@ -3,6 +3,8 @@ package az.coders.Design.homes.service.impl.footer;
 import az.coders.Design.homes.config.EnhancedObjectMapper;
 import az.coders.Design.homes.dto.footer.ContactInfoDto;
 import az.coders.Design.homes.entity.footer.ContactInfo;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.footer.ContactInfoRepository;
 import az.coders.Design.homes.service.ContactInfoService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,6 @@ public class ContactInfoServiceImpl implements ContactInfoService {
         contactInfoRepository.deleteById(id);
     }
     private ContactInfo findById(Integer id) {
-        return contactInfoRepository.findById(id).orElseThrow(()->new RuntimeException("contact info for that id not found"));
+        return contactInfoRepository.findById(id).orElseThrow(()->new NotFoundException(ErrorCode.NOT_FOUND));
     }
 }

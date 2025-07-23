@@ -1,5 +1,6 @@
 package az.coders.Design.homes.entity;
 
+import az.coders.Design.homes.entity.media.Media;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,10 +29,11 @@ public class ListProject {
     @JsonIgnore
     private ListServiceEntity service;
     private String status;
-
     private String overview;
     private String solution;
     private String result;
+    @OneToMany(mappedBy = "listProject", cascade = CascadeType.ALL)
+    private List<Media> images;
 
 
 }

@@ -16,11 +16,11 @@ public class AboutUs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int yearsOfExperience;
+    private String yearsOfExperience;
 
-    private int happyClients;
+    private String happyClients;
 
-    private int awardWinningDesigns;
+    private String awardWinningDesigns;
 
 
 }

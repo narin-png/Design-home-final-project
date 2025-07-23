@@ -1,11 +1,11 @@
 package az.coders.Design.homes.dto;
 
-import az.coders.Design.homes.entity.ListServiceEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.ManyToOne;
+import az.coders.Design.homes.entity.media.Media;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,4 +25,5 @@ public class ListProjectDto {
     private String overview;
     private String solution;
     private String result;
+    private List<Media> images;
 }

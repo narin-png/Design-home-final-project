@@ -1,11 +1,10 @@
 package az.coders.Design.homes.dto;
 
-import jakarta.persistence.Column;
+import az.coders.Design.homes.entity.media.Media;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Date;
 @Data
 @AllArgsConstructor
@@ -23,4 +22,5 @@ public class ListCareerDto {
     private String responsibilities;
 
     private String requirements;
+    private Media image;
 }

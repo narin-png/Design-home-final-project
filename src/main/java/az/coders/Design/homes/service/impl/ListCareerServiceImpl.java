@@ -5,6 +5,8 @@ import az.coders.Design.homes.dto.ListBloglDto;
 import az.coders.Design.homes.dto.ListCareerDto;
 import az.coders.Design.homes.entity.ListCareer;
 import az.coders.Design.homes.entity.blog.ListBlog;
+import az.coders.Design.homes.enums.ErrorCode;
+import az.coders.Design.homes.exception.NotFoundException;
 import az.coders.Design.homes.repository.ListCareerRepository;
 import az.coders.Design.homes.service.ListCareerService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,7 @@ public class ListCareerServiceImpl implements ListCareerService {
 
     @Override
     public ListCareerDto getById(Integer id) {
-        return enhancedObjectMapper.convertValue(listCareerRepository.findById(id).orElseThrow(() -> new RuntimeException("career option not found with id: " + id)), ListCareerDto.class) ;
+        return enhancedObjectMapper.convertValue(listCareerRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND)), ListCareerDto.class) ;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class ListCareerServiceImpl implements ListCareerService {
         @Override
     public ListCareerDto update(Integer id, ListCareerDto updatedJob) {
         ListCareer existingCareer=listCareerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("job not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND));
         existingCareer.setDeadline(updatedJob.getDeadline());
         existingCareer.setPositionName(updatedJob.getPositionName());
         existingCareer.setResponsibilities(updatedJob.getResponsibilities());
@@ -46,6 +48,7 @@ public class ListCareerServiceImpl implements ListCareerService {
         existingCareer.setJobType(updatedJob.getJobType());
         existingCareer.setWorkMode(updatedJob.getWorkMode());
         existingCareer.setSalary(updatedJob.getSalary());
+        existingCareer.setImage(updatedJob.getImage());
         ListCareer updatedCareer=listCareerRepository.save(existingCareer);
         return enhancedObjectMapper.convertValue(updatedCareer,ListCareerDto.class);
     }
@@ -53,7 +56,7 @@ public class ListCareerServiceImpl implements ListCareerService {
     @Override
     public void delete(Integer id) {
         if (!listCareerRepository.existsById(id)) {
-            throw new RuntimeException("job not found with id: " + id);
+            throw new NotFoundException(ErrorCode.NOT_FOUND);
         }
         listCareerRepository.deleteById(id);
 

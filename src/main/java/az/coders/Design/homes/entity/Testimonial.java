@@ -1,5 +1,6 @@
 package az.coders.Design.homes.entity;
 
+import az.coders.Design.homes.entity.media.Media;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -34,4 +35,6 @@ public class Testimonial {
     private Consultation consultation;
     @Version
     private Integer version;
+    @OneToOne
+    private Media image;
 }
